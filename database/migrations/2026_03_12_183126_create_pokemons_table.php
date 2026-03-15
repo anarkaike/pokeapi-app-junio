@@ -15,6 +15,7 @@ return new class extends Migration
             $table->integer('weight')->nullable();
             $table->string('sprite_url')->nullable();
             $table->timestamps();
+            $table->timestamp('synced_at')->nullable();
         });
     }
 

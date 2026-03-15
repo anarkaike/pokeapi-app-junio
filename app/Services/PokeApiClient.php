@@ -13,6 +13,38 @@ class PokeApiClient implements PokeApiInterface
     protected int    $cacheTtl = 600;
 
     /**
+     * Fetch a paginated list of Pokémon.
+     *
+     * @param int $limit The number of Pokémon to fetch per page
+     * @param int $offset The offset for pagination
+     * @return array An array containing the list of Pokémon and pagination info.
+     * @throws Exception
+     */
+    public function fetchList(int $limit = 20, int $offset = 0): array
+    {
+        $cacheKey = "pokemon_list_l{$limit}_o{$offset}";
+
+        return Cache::remember($cacheKey, $this->cacheTtl, function () use ($limit, $offset) {
+            try {
+                $response = Http::timeout(5)->retry(3, 100)->get("{$this->baseUrl}/pokemon", [
+                    'limit' => $limit,
+                    'offset' => $offset,
+                ]);
+
+                if ($response->failed()) {
+                    throw new Exception("Erro ao carregar lista da API.");
+                }
+
+                return $response->json();
+
+            } catch (Exception $e) {
+                Log::critical("PokéAPI List Error: " . $e->getMessage());
+                throw new Exception("Não foi possível listar os Pokémons agora.");
+            }
+        });
+    }
+
+    /**
      * Fetch detailed Pokémon data.
      *
      * @param int|string $identifier The Pokémon's ID or name
@@ -50,34 +82,28 @@ class PokeApiClient implements PokeApiInterface
     }
 
     /**
-     * Fetch a paginated list of Pokémon.
-     *
-     * @param int $limit The number of Pokémon to fetch per page
-     * @param int $offset The offset for pagination
-     * @return array An array containing the list of Pokémon and pagination info.
+     * Get Pokémon data, trying local database first before falling back to the API.
+     * 
+     * @param string $identifier The Pokémon's name or ID
+     * @return PokemonData|null The Pokémon data or null if not found
      * @throws Exception
      */
-    public function fetchList(int $limit = 20, int $offset = 0): array
+    public function getPokemon(string $identifier): ?PokemonData
     {
-        $cacheKey = "pokemon_list_l{$limit}_o{$offset}";
+        try {
+            $local = \App\Models\Pokemon::where('name', strtolower($identifier))
+                ->orWhere('api_id', $identifier)
+                ->first();
 
-        return Cache::remember($cacheKey, $this->cacheTtl, function () use ($limit, $offset) {
-            try {
-                $response = Http::timeout(5)->retry(3, 100)->get("{$this->baseUrl}/pokemon", [
-                    'limit' => $limit,
-                    'offset' => $offset,
-                ]);
-
-                if ($response->failed()) {
-                    throw new Exception("Erro ao carregar lista da API.");
-                }
-
-                return $response->json();
-
-            } catch (Exception $e) {
-                Log::critical("PokéAPI List Error: " . $e->getMessage());
-                throw new Exception("Não foi possível listar os Pokémons agora.");
+            if ($local) {
+                return PokemonData::fromModel($local);
             }
-        });
+
+            return $this->fetchPokemon($identifier);
+
+        } catch (Exception $e) {
+            Log::error("PokéApp Get Error: " . $e->getMessage());
+            return null;
+        }
     }
 }

@@ -19,12 +19,12 @@
     </p>
 
     <div class="text-right space-x-2">
-        <x-secondary-button href="{{ route('register') }}">
+        <x-buttons.secondary-button href="{{ route('register') }}">
             {{ __('Criar Conta') }}
-        </x-secondary-button>
-        <x-primary-button href="{{ route('login') }}">
+        </x-buttons.secondary-button>
+        <x-buttons.primary-button href="{{ route('login') }}">
             {{ __('Acessar') }}
-        </x-primary-button>
+        </x-buttons.primary-button>
     </div>
 
 </x-guest-layout>

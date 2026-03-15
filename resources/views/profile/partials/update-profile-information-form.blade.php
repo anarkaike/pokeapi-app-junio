@@ -55,7 +55,9 @@
                 <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"
                     class="text-sm text-green-600">{{ __('Salvo!') }}</p>
             @endif
-            <x-primary-button>{{ __('Salvar') }}</x-primary-button>
+            <x-buttons.primary-button>
+                {{ __('Salvar') }}
+            </x-buttons.primary-button>
         </div>
     </form>
 </section>

@@ -27,6 +27,7 @@ class PokemonImporter
                         'height'     => $data->height,
                         'weight'     => $data->weight,
                         'sprite_url' => $data->spriteUrl,
+                        'synced_at'  => now(),
                     ]
                 );
 

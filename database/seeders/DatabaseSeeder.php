@@ -28,6 +28,6 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt(config('app.seeders.viewer_password'))
         ]);
 
-        Pokemon::factory(20)->withAttributes()->create();
+        // Pokemon::factory(20)->withAttributes()->create();
     }
 }

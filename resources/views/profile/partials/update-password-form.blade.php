@@ -40,7 +40,9 @@
                     class="text-sm text-green-600">{{ __('Salvo!') }}</p>
             @endif
 
-            <x-primary-button>{{ __('Salvar') }}</x-primary-button>
+            <x-buttons.primary-button>
+                {{ __('Salvar') }}
+            </x-buttons.primary-button>
         </div>
     </form>
 </section>

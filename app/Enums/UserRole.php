@@ -20,4 +20,16 @@ enum UserRole: string
     {
         return array_column(self::cases(), 'value');
     }
+
+    /**
+     * Get the human-readable label for the enum value.
+     */
+    public function label(): string
+    {
+        return match($this) {
+            self::ADMIN  => 'Administrador',
+            self::EDITOR => 'Editor',
+            self::VIEWER => 'Visualizador',
+        };
+    }
 }

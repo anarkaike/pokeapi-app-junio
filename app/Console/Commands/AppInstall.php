@@ -28,10 +28,10 @@ class AppInstall extends Command
     {
         $this->newLine()->alert('Iniciando o setup da PokéApp');
 
+        $this->migrateFreshWithSeed();
         $this->clearAllCaches();
         $this->generateKeyAndLinkStorage();
         $this->npmInstallAndBuild();
-        $this->migrateFreshWithSeed();
         $this->flushAllRedis();
 
         $this->newLine(2)->info('✅ Aplicação pronta para uso em: ' . config('app.url'));
@@ -59,11 +59,8 @@ class AppInstall extends Command
     }
 
     private function npmInstallAndBuild() {
-        $this->newLine()->info('  ➔ Instalando dependências do NPM...');
-        Process::forever()->run('npm install')->throw();
-
-        $this->newLine()->info('  ➔ Compilando assets do Vite...');
-        Process::forever()->run('npm run build')->throw();
+        $this->newLine()->info('  ➔ Instalando dependências do NPM e compilando assets do Vite...');
+        Process::forever()->run('npm install && npm run build')->throw();
     }
 
     private function npmRunDev() {
