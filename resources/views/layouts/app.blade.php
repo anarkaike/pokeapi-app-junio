@@ -18,11 +18,11 @@
 </head>
 
 <body style="background-image: url('{{ asset('images/bg.png') }}');" class="bg-cover bg-right-bottom">
-    <div class="min-h-screen flex flex-col bg-gray-200/50">
+    <div class="min-h-screen flex flex-col bg-slate-300/50">
         @include('layouts.navigation')
 
         @isset($header)
-            <header class="bg-white shadow">
+            <header class="bg-white/80 shadow">
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight max-w-7xl mx-auto py-2 px-4 sm:px-6 lg:px-8">
                     {{ $header }}
                 </h2>
@@ -37,6 +37,7 @@
 
         @include('layouts.footer')
     </div>
+    <x-toast />
 </body>
 
 </html>

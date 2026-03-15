@@ -1,7 +1,7 @@
 @props([
-    'width' => 'w-[100%]',
+    'width'  => 'w-[100%]',
     'height' => 'h-auto',
-    'class' => '',
+    'class'  => '',
 ])
 <img src="{{ asset('images/logo.png') }}" alt="PokéApp Logo"
     {{ $attributes->merge(['class' => "$width $height $class"]) }}>

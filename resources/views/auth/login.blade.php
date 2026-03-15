@@ -11,15 +11,15 @@
 
         <div class="flex items-center justify-center my-2 space-x-2">
             <span class="text-sm font-medium text-gray-700">Preencher com:</span>
-            <x-secondary-button @click="fill('admin')" :border="false">
+            <x-buttons.secondary-button @click="fill('admin')" :border="false">
                 {{ __('Admin') }}
-            </x-secondary-button>
-            <x-secondary-button @click="fill('editor')" :border="false">
+            </x-buttons.secondary-button>
+            <x-buttons.secondary-button @click="fill('editor')" :border="false">
                 {{ __('Editor') }}
-            </x-secondary-button>
-            <x-secondary-button @click="fill('viewer')" :border="false">
+            </x-buttons.secondary-button>
+            <x-buttons.secondary-button @click="fill('viewer')" :border="false">
                 {{ __('Viewer') }}
-            </x-secondary-button>
+            </x-buttons.secondary-button>
         </div>
 
         <form method="POST" action="{{ route('login') }}" class="mt-2">
@@ -44,15 +44,15 @@
             </div>
 
             <div class="flex items-center justify-end mt-5 space-x-2">
-                <x-secondary-button href="{{ route('home') }}" border=''>
+                <x-buttons.secondary-button href="{{ route('home') }}" border=''>
                     {{ __('← Voltar') }}
-                </x-secondary-button>
-                <x-secondary-button href="{{ route('register') }}">
+                </x-buttons.secondary-button>
+                <x-buttons.secondary-button href="{{ route('register') }}">
                     {{ __('Criar Conta') }}
-                </x-secondary-button>
-                <x-primary-button class="ms-3">
+                </x-buttons.secondary-button>
+                <x-buttons.primary-button class="ms-3">
                     {{ __('Acessar') }}
-                </x-primary-button>
+                </x-buttons.primary-button>
             </div>
         </form>
     </div>
@@ -63,7 +63,6 @@
                 email: '',
                 password: '',
                 fill(role) {
-                    // Mapeamento dos dados que vêm do seu config/env do Laravel
                     const users = {
                         admin: {
                             email: @json(config('app.seeders.admin_email')),

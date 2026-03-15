@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Gate;
+use App\Models\Pokemon;
+use App\Policies\PokemonPolicy;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,5 +23,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         \Illuminate\Support\Facades\App::setLocale('pt_BR');
+        Gate::policy(Pokemon::class, PokemonPolicy::class);
     }
 }

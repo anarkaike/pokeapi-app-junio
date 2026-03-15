@@ -22,7 +22,7 @@
     <div class="min-h-screen flex flex-col justify-center items-center bg-gray-200/50 p-10">
 
         <a href="/">
-            <x-logo-app />
+            <x-images.logo-app />
         </a>
 
         <div class="w-full sm:max-w-5xl m-5 p-10 bg-white rounded-2xl">
@@ -39,9 +39,10 @@
 
         </div>
 
-        <x-logo-ipe-digital />
+        <x-images.logo-ipe-digital />
 
     </div>
+    <x-toast />
 </body>
 
 </html>

@@ -25,7 +25,12 @@ class Pokemon extends Model
         'name', 
         'height', 
         'weight', 
-        'sprite_url'
+        'sprite_url',
+        'synced_at',
+    ];
+
+    protected $casts = [
+        'synced_at'   => 'datetime',
     ];
 
     /**

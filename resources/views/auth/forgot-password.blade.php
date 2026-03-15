@@ -16,12 +16,12 @@
         </div>
 
         <div class="flex items-center justify-end mt-4 space-x-2">
-            <x-secondary-button href="{{ route('home') }}" border=''>
+            <x-buttons.secondary-button href="{{ route('home') }}" border=''>
                 {{ __('← Voltar') }}
-            </x-secondary-button>
-            <x-primary-button>
+            </x-buttons.secondary-button>
+            <x-buttons.primary-button>
                 {{ __('Receber Link') }}
-            </x-primary-button>
+            </x-buttons.primary-button>
         </div>
     </form>
 </x-guest-layout>

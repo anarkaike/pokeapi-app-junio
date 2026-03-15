@@ -8,7 +8,6 @@
     <form method="POST" action="{{ route('register') }}" class="pt-2">
         @csrf
 
-        <!-- Name -->
         <div>
             <x-input-label for="name">
                 {{ __('Nome') }}
@@ -19,7 +18,6 @@
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
-        <!-- Email Address -->
         <div class="mt-4">
             <x-input-label for="email">
                 {{ __('Email') }}
@@ -30,7 +28,6 @@
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
-        <!-- Password -->
         <div class="mt-4">
             <x-input-label for="password">
                 {{ __('Senha') }}
@@ -43,7 +40,6 @@
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
-        <!-- Confirm Password -->
         <div class="mt-4">
             <x-input-label for="password_confirmation">
                 {{ __('Repetir Senha') }}
@@ -57,15 +53,18 @@
         </div>
 
         <div class="flex items-center justify-end mt-5 space-x-2">
-            <x-secondary-button href="{{ route('home') }}" border=''>
+
+            <x-buttons.secondary-button href="{{ route('home') }}" border=''>
                 {{ __('← Voltar') }}
-            </x-secondary-button>
-            <x-secondary-button href="{{ route('login') }}" border=''>
+            </x-buttons.secondary-button>
+
+            <x-buttons.secondary-button href="{{ route('login') }}" border=''>
                 {{ __('Já tem conta? Entre!') }}
-            </x-secondary-button>
-            <x-primary-button class="ms-3">
+            </x-buttons.secondary-button>
+
+            <x-buttons.primary-button class="ms-3">
                 {{ __('Cadastrar') }}
-            </x-primary-button>
+            </x-buttons.primary-button>
         </div>
     </form>
 </x-guest-layout>

@@ -4,7 +4,9 @@
     "type": "module",
     "scripts": {
         "build": "vite build",
-        "dev": "vite"
+        "dev": "vite",
+        "start": "concurrently \"./vendor/bin/sail up\" \"./vendor/bin/sail npm run dev\"",
+        "reset": "./vendor/bin/sail down -v && ./vendor/bin/sail up -d --build && ./vendor/bin/sail php artisan app:install && ./vendor/bin/sail npm run dev"
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.5.2",

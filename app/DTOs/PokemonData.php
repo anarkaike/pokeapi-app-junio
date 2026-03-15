@@ -1,6 +1,8 @@
 <?php
 namespace App\DTOs;
 
+use Illuminate\Support\Carbon;
+
 readonly class PokemonData
 {
     public function __construct(
@@ -12,6 +14,7 @@ readonly class PokemonData
         public array    $types,
         public array    $abilities,
         public array    $moves,
+        public ?Carbon  $syncedAt = null,
     ) {}
 
     /**
@@ -28,6 +31,25 @@ readonly class PokemonData
             types:      collect($data['types'])     ->pluck('type.name')            ->toArray(),
             abilities:  collect($data['abilities']) ->pluck('ability.name')         ->toArray(),
             moves:      collect($data['moves'])     ->take(5)->pluck('move.name')   ->toArray(),
+            syncedAt:   null
+        );
+    }
+
+    /**
+     * Create a PokemonData instance from a local Pokemon model.
+     */
+    public static function fromModel(\App\Models\Pokemon $model): self
+    {
+        return new self(
+            name:       $model->name,
+            apiId:      $model->api_id,
+            spriteUrl:  $model->sprite_url,
+            types:      $model->types->pluck('name')->toArray() ?? [],
+            abilities:  $model->abilities->pluck('name')->toArray() ?? [],
+            moves:      $model->moves->pluck('name')->toArray() ?? [],
+            height:     $model->height ?? 0,
+            weight:     $model->weight ?? 0,
+            syncedAt:   $model->synced_at
         );
     }
 }
