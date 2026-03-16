@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\{ Redis, Process };
 
 class AppInstall extends Command
 {
-    protected $signature    = 'app:install';
+    protected $signature    = 'app:init';
     protected $description  = 'Executa o setup completo da aplicação';
 
     public function handle()

@@ -5,15 +5,16 @@
     "scripts": {
         "build": "vite build",
         "dev": "vite",
-        "docker:dev:up": "docker compose -f docker-compose.dev.yaml up -d --build",
-        "docker:dev:install": "docker compose -f docker-compose.dev.yaml exec app php artisan app:install",
-        "docker:dev:init": "npm run docker:dev:up && npm run docker:dev:install",
+        "docker:dev:init": "docker compose -f docker-compose.dev.yaml exec php artisan app:init",
+        "docker:dev:build": "docker compose -f docker-compose.dev.yaml up -d --build",
+        "docker:dev:install": "cp .env.example .env && npm run docker:dev:build && sleep 5 && npm run docker:dev:init",
         "docker:dev:down": "docker compose -f docker-compose.dev.yaml down",
-        "docker:dev:reset": "docker compose -f docker-compose.dev.yaml down -v && docker compose -f docker-compose.dev.yaml up -d --build",
-        "docker:prod:up": "docker compose -f docker-compose.prod.yaml up -d --build",
-        "docker:prod:install": "docker compose -f docker-compose.prod.yaml exec app php artisan app:install",
-        "docker:prod:init": "npm run docker:prod:up && npm run docker:prod:install",
-        "docker:prod:down": "docker compose -f docker-compose.prod.yaml down"
+        "docker:dev:reset": "npm run docker:dev:down && npm run docker:dev:install",
+        "docker:prod:init": "docker compose -f docker-compose.prod.yaml exec php artisan app:init",
+        "docker:prod:build": "docker compose -f docker-compose.prod.yaml up -d --build",
+        "docker:prod:install": "npm run docker:prod:build && sleep 5 && npm run docker:prod:init",
+        "docker:prod:down": "docker compose -f docker-compose.prod.yaml down",
+        "docker:prod:reset": "npm run docker:dev:down && npm run docker:dev:install"
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.5.2",

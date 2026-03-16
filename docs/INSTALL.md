@@ -11,35 +11,27 @@ Instruções para configurar a aplicação no ambiente local com Docker Compose 
 ## Pré-requisitos
 - OrbStack ou Docker Desktop
 - Git
+- Node
+- NPM
 
-## Execução Inicial
+## Instalando o Projeto
+Este projeto utiliza **Docker Compose** para execução local e deploy.
 
 ### 1. Clone o repositório em uma pasta vazia
 ```bash
 git clone https://github.com/anarkaike/pokeapi-app-junio.git .
 ```
 
-### 2. Crie o arquivo `.env` local
-```bash
-cp .env.example .env
-```
-
-### 3. Subir os containers
-Suba os containers do projeto. Garanta que o docker esteja rodando.
-```bash
-docker compose -f docker-compose.dev.yaml up -d --build
-```
-
-### 4. Setup Automatizado
+### 2. Setup Automatizado
 Limpe todos os caches, gere a chave, link storage, rode todas as migrations e seeds, execute a instalação do npm e compilação do vite com um único comando:
 ```bash
-docker compose -f docker-compose.dev.yaml exec app php artisan app:install
+npm run docker:dev:install
 ```
 
-### 5. Hot Reload (opcional, para desenvolvimento)
+### 3. Hot Reload (opcional, para desenvolvimento)
 Caso queira ativar o Hot Reload para melhor DX (Experiência de Desenvolvimento), rode:
 ```bash
-npm run dev
+docker compose -f docker-compose.dev.yaml exec npm run dev
 ```
 
 Após os passos, acesse http://localhost

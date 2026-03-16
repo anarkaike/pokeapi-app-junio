@@ -32,26 +32,18 @@ Link da documentação: [https://pokeapi.co/docs/v2](https://pokeapi.co/docs/v2)
 ## Instalando o Projeto
 Este projeto utiliza **Docker Compose** para execução local e deploy.
 
-### **Passo 01**: Clone o repositório do desafio em uma pasta vazia
+- **Pré-requisitos:** OrbStack ou Docker Desktop, Git, Node e NPM
+
+### 1. Clone o repositório em uma pasta vazia
 ```bash
 git clone https://github.com/anarkaike/pokeapi-app-junio.git .
 ```
 
-### **Passo 02**: Crie o `.env` local
+### 2. Setup Automatizado
+Limpe todos os caches, gere a chave, link storage, rode todas as migrations e seeds, execute a instalação do npm e compilação do vite com um único comando:
 ```bash
-cp .env.example .env
+npm run docker:dev:install
 ```
-
-### **Passo 03**: Suba os containers (requer Docker/OrbStack)
-```bash
-docker compose -f docker-compose.dev.yaml up -d --build
-```
-
-### **Passo 04**: Execute o setup inicial
-```bash
-docker compose -f docker-compose.dev.yaml exec app php artisan app:install
-```
-
 
 Após os passos, acesse http://localhost
 
