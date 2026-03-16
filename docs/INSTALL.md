@@ -16,7 +16,7 @@ Instruções para configurar a aplicação no ambiente local com Docker Compose 
 
 ### 1. Clone o repositório em uma pasta vazia
 ```bash
-git clone https://github.com/anarkaike/pokeapi-app.git .
+git clone https://github.com/anarkaike/pokeapi-app-junio.git .
 ```
 
 ### 2. Crie o arquivo `.env` local

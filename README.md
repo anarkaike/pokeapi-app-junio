@@ -34,7 +34,7 @@ Este projeto utiliza **Docker Compose** para execução local e deploy.
 
 ### **Passo 01**: Clone o repositório do desafio em uma pasta vazia
 ```bash
-git clone https://github.com/anarkaike/pokeapi-app.git .
+git clone https://github.com/anarkaike/pokeapi-app-junio.git .
 ```
 
 ### **Passo 02**: Crie o `.env` local
